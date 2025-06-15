@@ -21,9 +21,9 @@ public class GameManager : Singleton<GameManager>
     }
 
     //TODO: Create Player action and Enemy action
-    public void TurnAction()
+    public void TurnAction(string playerTurnType)
     {
         //TEST
-        combatManager.TurnCombat();
+        combatManager.TurnCombat(playerTurnType);
     }
 }

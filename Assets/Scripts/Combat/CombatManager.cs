@@ -5,7 +5,7 @@ using UnityEngine;
 public class CombatManager : Singleton<CombatManager>
 {
     [Header("Turn Manager")]
-    public TurnManager TurnManager;
+    public TurnManager turnManager;
 
     //Enemies
     [Header("Enemy")]
@@ -17,6 +17,9 @@ public class CombatManager : Singleton<CombatManager>
 
     //Scripts data
     private EntityScriptsAllData entityScriptsAllData;
+
+    //Actions
+    private Dictionary<string, System.Action<PlayerScript, EntityScript>> playerActions;
 
     public EnemyScript[] GetEnemiesScript()
     {
@@ -41,7 +44,7 @@ public class CombatManager : Singleton<CombatManager>
         }
     }
 
-    public EntityScriptsAllData GetEntityScripts()
+    public EntityScriptsAllData GetEntityScriptsData()
     {
         List<EnemyScript> enemyScripts = new List<EnemyScript>(GetEnemiesScript());
         PlayerScript playerScript = GetPlayerScript();
@@ -55,12 +58,21 @@ public class CombatManager : Singleton<CombatManager>
     {
         if(entityScriptsAllData == null)
         {
-            entityScriptsAllData = GetEntityScripts();
+            entityScriptsAllData = GetEntityScriptsData();
         }
+
+        playerActions = new Dictionary<string, System.Action<PlayerScript, EntityScript>>()
+        {
+            { "Attack", (player, target) => player.Attack(target)},
+            { "TimeMagic", (player, target) => turnManager.ChangeToPreviousTurn(1,entityScriptsAllData)},
+        };
+
+        //Turn 0
+        turnManager.StartNewTurn(entityScriptsAllData);
     }
 
     //TODO: Player and Enemy Turn
-    public void TurnCombat()
+    public void TurnCombat(string playerTurnType)
     {
         //Get script
         PlayerScript playerScript = entityScriptsAllData.playerScript;
@@ -70,25 +82,29 @@ public class CombatManager : Singleton<CombatManager>
         //TEST just attack the first enemy
         EnemyScript testEnemy = enemyScripts[0];
 
+        playerActions[playerTurnType](playerScript,testEnemy);
+        //playerScript.Attack(testEnemy);
 
-        playerScript.Attack(testEnemy);
-
-        testEnemy.Attack(playerScript);
-
-        //TODO: Check death
-        if (playerScript.healthScript.CheckDeath())
+        if(playerTurnType!= "TimeMagic")
         {
-            Debug.Log("Player DIED");
-            Destroy(playerGameObject);
-        }
-        //TEST just for the first enemy
-        if (testEnemy.healthScript.CheckDeath())
-        {
-            Debug.Log("TEST DIED, YOU WIN");
-            Destroy(enemiesGameObject);
-        }
+            testEnemy.Attack(playerScript);
 
-        //TEST end turn one
-        TurnManager.StartNewTurn(entityScriptsAllData);
+            //TODO: Check death
+            if (playerScript.healthScript.CheckDeath())
+            {
+                Debug.Log("Player DIED");
+                Destroy(playerGameObject);
+            }
+            //TEST just for the first enemy
+            if (testEnemy.healthScript.CheckDeath())
+            {
+                Debug.Log("TEST DIED, YOU WIN");
+                Destroy(enemiesGameObject);
+            }
+
+            //End of turn
+            entityScriptsAllData = GetEntityScriptsData();
+            turnManager.StartNewTurn(entityScriptsAllData);
+        }
     }
 }

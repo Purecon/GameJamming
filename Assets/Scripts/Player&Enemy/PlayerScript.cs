@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PlayerScript : EntityScript
 {
-    //No special player only
-    //TODO: Turn manipulation
+    //Special to player only
+    //TODO: Buff
 }

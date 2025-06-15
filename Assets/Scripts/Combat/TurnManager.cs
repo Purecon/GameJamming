@@ -22,17 +22,14 @@ public class TurnManager : MonoBehaviour
 {
     [Header("Turn Dictionary")]
     public List<Turn> turnData;
-    public int currentTurnCount = 1;
+    public int currentTurnCount = 0;
 
     private void Start()
     {
-        turnData = new List<Turn>();
-
         //Set the turn UI
         updateTurnUI();
     }
 
-    //TODO: What happened in a turn
     //This is the changed of a turn and saved the data
     public void StartNewTurn(CombatManager.EntityScriptsAllData entityScriptsData)
     {
@@ -40,13 +37,52 @@ public class TurnManager : MonoBehaviour
         Debug.LogFormat("EntityData:{0}", entityScriptsData);
 
         //Save entities
-        EntityState playerState = entityScriptsData.playerScript.entityData.state;
-        List<EntityState> enemiesState = entityScriptsData.enemyScripts.Select(e => e.entityData.state).ToList();
+        EntityState playerState = entityScriptsData.playerScript.currentState.Clone();
+        List<EntityState> enemiesState = entityScriptsData.enemyScripts.Select(e => e.currentState.Clone()).ToList();
+
+        //DEBUGGING
+        Debug.Log($"Player currentState ref: {playerState.GetHashCode()}");
+        foreach (EntityState enemyState in enemiesState) {
+            Debug.Log($"Enemy currentState ref: {enemyState.GetHashCode()}");
+        }
 
         turnData.Add(new Turn(currentTurnCount, playerState, enemiesState));
 
         //Move the turn
         currentTurnCount++;
+
+        //Set the turn UI
+        updateTurnUI();
+    }
+
+    public void ChangeToPreviousTurn(int prevTurn, CombatManager.EntityScriptsAllData entityScriptsData)
+    {
+        //Move the turn
+        currentTurnCount -= prevTurn;
+        int crntIdx = currentTurnCount - 1;
+        Debug.Log($"CurrentIndex {crntIdx}");
+
+        //Load entities
+        Turn pastTurn = turnData[crntIdx];
+        Debug.Log($"PlayerState {pastTurn.playerState.currentHealth}");
+
+        //Change state
+        PlayerScript playerScript = entityScriptsData.playerScript;
+        List<EnemyScript> enemyScripts = entityScriptsData.enemyScripts;
+
+        playerScript.currentState = pastTurn.playerState.Clone();
+        playerScript.healthScript.SetHealth(pastTurn.playerState.currentHealth);
+        for (int i = 0; i < pastTurn.enemiesState.Count; i++)
+        {
+            if (enemyScripts[i] != null)
+            {
+                enemyScripts[i].currentState = pastTurn.enemiesState[i].Clone();
+                enemyScripts[i].healthScript.SetHealth(pastTurn.enemiesState[i].currentHealth);
+            }
+        }
+
+        //Delete the array after
+        turnData.RemoveRange(crntIdx + 1, turnData.Count - (crntIdx + 1));
 
         //Set the turn UI
         updateTurnUI();

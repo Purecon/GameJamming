@@ -13,6 +13,8 @@ public class EntityState
     public float currentHealth = 10f;
     public float maxHealth = 10f;
 
+    //TODO: Resistances
+
     public enum Teams
     {
         Player,
@@ -21,6 +23,19 @@ public class EntityState
 
     [Header("Team")]
     public Teams currentTeam;
+
+    //Deep copy
+    public EntityState Clone()
+    {
+        return new EntityState
+        {
+            physicalAttackDamage = this.physicalAttackDamage,
+            magicAttackDamage = this.magicAttackDamage,
+            maxHealth = this.maxHealth,
+            currentHealth = this.currentHealth,
+            currentTeam = this.currentTeam
+        };
+    }
 }
 
 public class EntityScript : MonoBehaviour
@@ -41,7 +56,10 @@ public class EntityScript : MonoBehaviour
         //For succesful attack
         if (currentState.currentTeam != targetEntity.currentState.currentTeam)
         {
+            //Change health script
             targetEntity.healthScript.ChangeHealth(-currentState.physicalAttackDamage);
+            //Change current state
+            targetEntity.currentState.currentHealth = targetEntity.healthScript.currentHealth;
         }
     }
 
@@ -51,7 +69,8 @@ public class EntityScript : MonoBehaviour
         if (entityData != null)
         {
             //Set intial state
-            currentState = entityData.state;
+            currentState = entityData.state.Clone();
+            Debug.Log($"{name} currentState ref: {currentState.GetHashCode()}");
         }
         else
         {
