@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     [Header("Managers")]
     public CombatManager combatManager;
+    public UIManager uiManager;
 
     private void Start()
     {

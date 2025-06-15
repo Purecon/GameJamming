@@ -69,7 +69,10 @@ public class CombatManager : Singleton<CombatManager>
         //TODO: Correct the target
         //TEST just attack the first enemy
         EnemyScript testEnemy = enemyScripts[0];
+
+
         playerScript.Attack(testEnemy);
+
         testEnemy.Attack(playerScript);
 
         //TODO: Check death

@@ -24,6 +24,14 @@ public class TurnManager : MonoBehaviour
     public List<Turn> turnData;
     public int currentTurnCount = 1;
 
+    private void Start()
+    {
+        turnData = new List<Turn>();
+
+        //Set the turn UI
+        updateTurnUI();
+    }
+
     //TODO: What happened in a turn
     //This is the changed of a turn and saved the data
     public void StartNewTurn(CombatManager.EntityScriptsAllData entityScriptsData)
@@ -39,5 +47,14 @@ public class TurnManager : MonoBehaviour
 
         //Move the turn
         currentTurnCount++;
+
+        //Set the turn UI
+        updateTurnUI();
+    }
+
+    //TODO: Create better turn UI
+    void updateTurnUI()
+    {
+        UIManager.Instance.GetComponent<UIManager>().SetTurnText(currentTurnCount);
     }
 }

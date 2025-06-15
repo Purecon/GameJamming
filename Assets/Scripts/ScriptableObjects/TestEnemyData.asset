@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TestEnemyData
   m_EditorClassIdentifier: 
   state:
-    physicalAttackDamage: 5
+    physicalAttackDamage: 4
     magicAttackDamage: 1
-    currentHealth: 5
-    maxHealth: 5
+    currentHealth: 8
+    maxHealth: 8
     currentTeam: 1
