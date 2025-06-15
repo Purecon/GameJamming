@@ -59,6 +59,10 @@ public class TurnManager : MonoBehaviour
     {
         //Move the turn
         currentTurnCount -= prevTurn;
+        if (currentTurnCount < 0)
+        {
+            
+        }
         int crntIdx = currentTurnCount - 1;
         Debug.Log($"CurrentIndex {crntIdx}");
 
