@@ -15,7 +15,14 @@ public class GameManager : Singleton<GameManager>
             combatManager = CombatManager.Instance;
         }
 
-        //Start Turn one TEST
-        combatManager.TurnManager.StartNewTurn(combatManager.GetEntityScripts());
+        //Ideally use a button to trigger this, for now through script
+        //combatManager.TurnCombat();
+    }
+
+    //TODO: Create Player action and Enemy action
+    public void TurnAction()
+    {
+        //TEST
+        combatManager.TurnCombat();
     }
 }

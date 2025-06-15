@@ -15,6 +15,9 @@ public class CombatManager : Singleton<CombatManager>
     [Header("Player")]
     public GameObject playerGameObject;
 
+    //Scripts data
+    private EntityScriptsAllData entityScriptsAllData;
+
     public EnemyScript[] GetEnemiesScript()
     {
         return enemiesGameObject.GetComponentsInChildren<EnemyScript>();
@@ -48,9 +51,41 @@ public class CombatManager : Singleton<CombatManager>
         return entityScriptsAllData;
     }
 
+    private void Start()
+    {
+        if(entityScriptsAllData == null)
+        {
+            entityScriptsAllData = GetEntityScripts();
+        }
+    }
+
     //TODO: Player and Enemy Turn
     public void TurnCombat()
     {
-        //TODO: Ideally use a button to trigger this, for now through script
+        //Get script
+        PlayerScript playerScript = entityScriptsAllData.playerScript;
+        List<EnemyScript> enemyScripts = entityScriptsAllData.enemyScripts;
+
+        //TODO: Correct the target
+        //TEST just attack the first enemy
+        EnemyScript testEnemy = enemyScripts[0];
+        playerScript.Attack(testEnemy);
+        testEnemy.Attack(playerScript);
+
+        //TODO: Check death
+        if (playerScript.healthScript.CheckDeath())
+        {
+            Debug.Log("Player DIED");
+            Destroy(playerGameObject);
+        }
+        //TEST just for the first enemy
+        if (testEnemy.healthScript.CheckDeath())
+        {
+            Debug.Log("TEST DIED, YOU WIN");
+            Destroy(enemiesGameObject);
+        }
+
+        //TEST end turn one
+        TurnManager.StartNewTurn(entityScriptsAllData);
     }
 }

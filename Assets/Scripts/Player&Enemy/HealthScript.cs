@@ -47,7 +47,9 @@ public class HealthScript : MonoBehaviour
         //Change
         currentHealth += change;
         Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthBar.value = (currentHealth / maxHealth);
+
+        //For better look clamp
+        healthBar.value = Mathf.Clamp(currentHealth / maxHealth, 0.1f, maxHealth);
     }
 
     //private void Start()

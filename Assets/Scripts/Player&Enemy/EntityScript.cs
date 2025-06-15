@@ -35,8 +35,9 @@ public class EntityScript : MonoBehaviour
     public HealthScript healthScript;
 
     //Attack target
-    public void Attack(EntityScript targetEntity)
+    public virtual void Attack(EntityScript targetEntity)
     {
+        Debug.LogFormat("{0} attack {1}", name, targetEntity.name);
         //For succesful attack
         if (currentState.currentTeam != targetEntity.currentState.currentTeam)
         {
