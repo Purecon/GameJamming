@@ -13,6 +13,10 @@ public class EntityState
     public float currentHealth = 10f;
     public float maxHealth = 10f;
 
+    [Header("Mana")]
+    public float currentMana = 10f;
+    public float maxMana = 10f;
+
     //TODO: Resistances
 
     public enum Teams
@@ -33,6 +37,8 @@ public class EntityState
             magicAttackDamage = this.magicAttackDamage,
             maxHealth = this.maxHealth,
             currentHealth = this.currentHealth,
+            maxMana = this.maxMana,
+            currentMana = this.currentMana,
             currentTeam = this.currentTeam
         };
     }
@@ -50,9 +56,9 @@ public class EntityScript : MonoBehaviour
     public HealthScript healthScript;
 
     //Attack target
-    public virtual void Attack(EntityScript targetEntity)
+    public virtual void Attack(EntityScript targetEntity, string turnType)
     {
-        Debug.LogFormat("{0} attack {1}", name, targetEntity.name);
+        Debug.LogFormat("{0} {2} {1}", name, targetEntity.name, turnType);
         //For succesful attack
         if (currentState.currentTeam != targetEntity.currentState.currentTeam)
         {

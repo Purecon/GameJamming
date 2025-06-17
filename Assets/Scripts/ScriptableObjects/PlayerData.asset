@@ -15,6 +15,8 @@ MonoBehaviour:
   state:
     physicalAttackDamage: 1
     magicAttackDamage: 1
-    currentHealth: 10
-    maxHealth: 10
+    currentHealth: 24
+    maxHealth: 24
+    currentMana: 10
+    maxMana: 10
     currentTeam: 0

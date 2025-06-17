@@ -61,9 +61,11 @@ public class CombatManager : Singleton<CombatManager>
             entityScriptsAllData = GetEntityScriptsData();
         }
 
+        // Player Action
         playerActions = new Dictionary<string, System.Action<PlayerScript, EntityScript>>()
         {
-            { "Attack", (player, target) => player.Attack(target)},
+            { "Attack", (player, target) => player.Attack(target,"attack")},
+            { "M.Attack", (player, target) => player.Attack(target,"magic-attack5")},
             { "TimeMagic", (player, target) => turnManager.ChangeToPreviousTurn(1,entityScriptsAllData)},
         };
 
@@ -87,7 +89,7 @@ public class CombatManager : Singleton<CombatManager>
 
         if(playerTurnType!= "TimeMagic")
         {
-            testEnemy.Attack(playerScript);
+            testEnemy.Attack(playerScript, "attack");
 
             //TODO: Check death
             if (playerScript.healthScript.CheckDeath())
@@ -95,11 +97,12 @@ public class CombatManager : Singleton<CombatManager>
                 Debug.Log("Player DIED");
                 Destroy(playerGameObject);
             }
+            //TODO: Enemy death
             //TEST just for the first enemy
             if (testEnemy.healthScript.CheckDeath())
             {
                 Debug.Log("TEST DIED, YOU WIN");
-                Destroy(enemiesGameObject);
+                Destroy(testEnemy.gameObject);
             }
 
             //End of turn

@@ -59,10 +59,7 @@ public class TurnManager : MonoBehaviour
     {
         //Move the turn
         currentTurnCount -= prevTurn;
-        if (currentTurnCount < 0)
-        {
-            
-        }
+        currentTurnCount = Mathf.Max(0, currentTurnCount);
         int crntIdx = currentTurnCount - 1;
         Debug.Log($"CurrentIndex {crntIdx}");
 
@@ -74,8 +71,12 @@ public class TurnManager : MonoBehaviour
         PlayerScript playerScript = entityScriptsData.playerScript;
         List<EnemyScript> enemyScripts = entityScriptsData.enemyScripts;
 
+        //Set player state
         playerScript.currentState = pastTurn.playerState.Clone();
         playerScript.healthScript.SetHealth(pastTurn.playerState.currentHealth);
+        playerScript.SetMana(pastTurn.playerState.currentMana);
+
+        //Set enemies state
         for (int i = 0; i < pastTurn.enemiesState.Count; i++)
         {
             if (enemyScripts[i] != null)

@@ -901,13 +901,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.39044833, y: 0.34682897, z: -0.161729, w: 0.8373192}
+  m_LocalPosition: {x: -23.07, y: 3, z: -13.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 45, z: 0}
 --- !u!1 &741915081
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,13 +1212,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
+  m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1469783644}
-  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
 --- !u!1 &1290410718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,7 +1232,7 @@ GameObject:
   - component: {fileID: 1290410721}
   - component: {fileID: 1290410720}
   m_Layer: 5
-  m_Name: AttackButton2
+  m_Name: MAttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1311,7 +1311,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Attack
+          m_StringArgument: M.Attack
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1290410721
@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attack
+  m_text: M.Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -1731,7 +1731,7 @@ Transform:
   m_GameObject: {fileID: 1629244783}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.07568, y: 1.73983, z: -2.83631}
+  m_LocalPosition: {x: -17.34, y: 1.73983, z: -1.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatManager: {fileID: 1860251010}
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 683267131}
 --- !u!1 &1890393192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,7 +1985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5471655907820694497, guid: e1da0964c224a8341bdbfe212d4c2f99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5756831
+      value: -18.06
       objectReference: {fileID: 0}
     - target: {fileID: 5471655907820694497, guid: e1da0964c224a8341bdbfe212d4c2f99, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1993,7 +1993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5471655907820694497, guid: e1da0964c224a8341bdbfe212d4c2f99, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.977
+      value: -3.28
       objectReference: {fileID: 0}
     - target: {fileID: 5471655907820694497, guid: e1da0964c224a8341bdbfe212d4c2f99, type: 3}
       propertyPath: m_LocalRotation.w
