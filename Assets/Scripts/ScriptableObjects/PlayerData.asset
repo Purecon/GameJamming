@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state:
     physicalAttackDamage: 1
-    magicAttackDamage: 1
-    currentHealth: 24
-    maxHealth: 24
+    magicAttackDamage: 20
+    currentHealth: 35
+    maxHealth: 35
     currentMana: 10
     maxMana: 10
     currentTeam: 0

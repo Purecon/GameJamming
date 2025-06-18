@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CombatManager : Singleton<CombatManager>
 {
@@ -20,6 +21,9 @@ public class CombatManager : Singleton<CombatManager>
 
     //Actions
     private Dictionary<string, System.Action<PlayerScript, EntityScript>> playerActions;
+
+    //Targeted enemy
+    private EnemyScript targetedEnemy;
 
     public EnemyScript[] GetEnemiesScript()
     {
@@ -71,6 +75,22 @@ public class CombatManager : Singleton<CombatManager>
 
         //Turn 0
         turnManager.StartNewTurn(entityScriptsAllData);
+
+        //Select default enemy 
+        if(entityScriptsAllData.enemyScripts != null)
+        {
+            targetedEnemy = entityScriptsAllData.enemyScripts[0];
+            targetedEnemy.SetTargeted(true);
+        }
+    }
+
+    public void SetEnemyTarget(EnemyScript newTarget)
+    {
+        //Disable old target
+        targetedEnemy.SetTargeted(false);
+        //New target
+        targetedEnemy = newTarget;
+        targetedEnemy.SetTargeted(true);
     }
 
     //TODO: Player and Enemy Turn
@@ -80,29 +100,36 @@ public class CombatManager : Singleton<CombatManager>
         PlayerScript playerScript = entityScriptsAllData.playerScript;
         List<EnemyScript> enemyScripts = entityScriptsAllData.enemyScripts;
 
-        //TODO: Correct the target
-        //TEST just attack the first enemy
-        EnemyScript testEnemy = enemyScripts[0];
-
-        playerActions[playerTurnType](playerScript,testEnemy);
-        //playerScript.Attack(testEnemy);
+        playerActions[playerTurnType](playerScript,targetedEnemy);
+        //playerScript.Attack(targetedEnemy);
 
         if(playerTurnType!= "TimeMagic")
         {
-            testEnemy.Attack(playerScript, "attack");
+            targetedEnemy.Attack(playerScript, "attack");
 
-            //TODO: Check death
+            //TODO: Check death, add death screen
             if (playerScript.healthScript.CheckDeath())
             {
                 Debug.Log("Player DIED");
                 Destroy(playerGameObject);
             }
             //TODO: Enemy death
-            //TEST just for the first enemy
-            if (testEnemy.healthScript.CheckDeath())
+            if (targetedEnemy.healthScript.CheckDeath())
             {
-                Debug.Log("TEST DIED, YOU WIN");
-                Destroy(testEnemy.gameObject);
+                entityScriptsAllData.enemyScripts.Remove(targetedEnemy);
+                Destroy(targetedEnemy.gameObject);
+
+                if (entityScriptsAllData.enemyScripts.Count > 0)
+                {
+                    targetedEnemy = entityScriptsAllData.enemyScripts[0];
+                    targetedEnemy.SetTargeted(true);
+                    Debug.Log("Targeted enemy " + targetedEnemy.name);
+                }
+                else
+                {
+                    //TODO: WIN
+                    Debug.Log("YOU WIN!");
+                }
             }
 
             //End of turn

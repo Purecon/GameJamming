@@ -79,10 +79,11 @@ public class TurnManager : MonoBehaviour
         //Set enemies state
         for (int i = 0; i < pastTurn.enemiesState.Count; i++)
         {
-            if (enemyScripts[i] != null)
+            EnemyScript settingEnemy = enemyScripts.ElementAtOrDefault(i);
+            if (settingEnemy != null)
             {
-                enemyScripts[i].currentState = pastTurn.enemiesState[i].Clone();
-                enemyScripts[i].healthScript.SetHealth(pastTurn.enemiesState[i].currentHealth);
+                settingEnemy.currentState = pastTurn.enemiesState[i].Clone();
+                settingEnemy.healthScript.SetHealth(pastTurn.enemiesState[i].currentHealth);
             }
         }
 

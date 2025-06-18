@@ -33,6 +33,7 @@ public class EntityState
     {
         return new EntityState
         {
+            //entityName = this.entityName,
             physicalAttackDamage = this.physicalAttackDamage,
             magicAttackDamage = this.magicAttackDamage,
             maxHealth = this.maxHealth,
