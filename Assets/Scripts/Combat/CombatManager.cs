@@ -65,6 +65,12 @@ public class CombatManager : Singleton<CombatManager>
             entityScriptsAllData = GetEntityScriptsData();
         }
 
+        //Set enemy ID to be unique
+        foreach(EnemyScript enemyScript in entityScriptsAllData.enemyScripts)
+        {
+            enemyScript.currentState.entityName += enemyScript.gameObject.name; 
+        }
+
         // Player Action
         playerActions = new Dictionary<string, System.Action<PlayerScript, EntityScript>>()
         {
@@ -117,7 +123,7 @@ public class CombatManager : Singleton<CombatManager>
             if (targetedEnemy.healthScript.CheckDeath())
             {
                 entityScriptsAllData.enemyScripts.Remove(targetedEnemy);
-                Destroy(targetedEnemy.gameObject);
+                targetedEnemy.gameObject.SetActive(false);
 
                 if (entityScriptsAllData.enemyScripts.Count > 0)
                 {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : EntityScript
 {
+    //Targeting
     [Header("Enemy target")]
     public bool targeted = false;
     public GameObject targetedUI;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestEnemyData
   m_EditorClassIdentifier: 
   state:
+    entityName: TestEnemy
     physicalAttackDamage: 2
     magicAttackDamage: 1
     currentHealth: 100

@@ -77,15 +77,26 @@ public class TurnManager : MonoBehaviour
         playerScript.SetMana(pastTurn.playerState.currentMana);
 
         //Set enemies state
-        for (int i = 0; i < pastTurn.enemiesState.Count; i++)
-        {
-            EnemyScript settingEnemy = enemyScripts.ElementAtOrDefault(i);
+        foreach (EntityState pastEnemyState in pastTurn.enemiesState) 
+        { 
+            EnemyScript settingEnemy = enemyScripts.Find(e => e.currentState.entityName == pastEnemyState.entityName);
             if (settingEnemy != null)
             {
-                settingEnemy.currentState = pastTurn.enemiesState[i].Clone();
-                settingEnemy.healthScript.SetHealth(pastTurn.enemiesState[i].currentHealth);
+                settingEnemy.currentState = pastEnemyState.Clone();
+                settingEnemy.healthScript.SetHealth(pastEnemyState.currentHealth);
             }
         }
+
+        //for (int i = 0; i < pastTurn.enemiesState.Count; i++)
+        //{
+        //    //TODO: FIX THIS, BASED ON ID/SLOT
+        //    EnemyScript settingEnemy = enemyScripts.ElementAtOrDefault(i);
+        //    if (settingEnemy != null)
+        //    {
+        //        settingEnemy.currentState = pastTurn.enemiesState[i].Clone();
+        //        settingEnemy.healthScript.SetHealth(pastTurn.enemiesState[i].currentHealth);
+        //    }
+        //}
 
         //Delete the array after
         turnData.RemoveRange(crntIdx + 1, turnData.Count - (crntIdx + 1));
