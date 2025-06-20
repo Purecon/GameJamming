@@ -49,6 +49,14 @@ public class PlayerScript : EntityScript
         physicalAttackBuff++;
     }
 
+    // AOE attack
+    public void AOEAttack(List<EnemyScript> targetEntity, string turnType)
+    {
+        foreach (EnemyScript enemyTargetScript in targetEntity)
+        {
+            Attack(enemyTargetScript, turnType);
+        }
+    }
 
     //Change mana
     public void ChangeMana(float change)

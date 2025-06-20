@@ -76,6 +76,9 @@ public class CombatManager : Singleton<CombatManager>
         {
             { "Attack", (player, target) => player.Attack(target,"attack")},
             { "M.Attack", (player, target) => player.Attack(target,"magic-attack5")},
+            { "AOE_Attack", (player, target) => player.AOEAttack(entityScriptsAllData.enemyScripts,"attack")},
+            { "AOE_M.Attack", (player, target) =>  player.AOEAttack(entityScriptsAllData.enemyScripts,"magic-attack1")},
+
             { "TimeMagic", (player, target) => turnManager.ChangeToPreviousTurn(1,entityScriptsAllData)},
         };
 
@@ -120,12 +123,12 @@ public class CombatManager : Singleton<CombatManager>
             //TODO: Enemy death
             if (targetedEnemy.healthScript.CheckDeath())
             {
-                entityScriptsAllData.enemyScripts.Remove(targetedEnemy);
+                enemyScripts.Remove(targetedEnemy);
                 targetedEnemy.gameObject.SetActive(false);
 
-                if (entityScriptsAllData.enemyScripts.Count > 0)
+                if (enemyScripts.Count > 0)
                 {
-                    targetedEnemy = entityScriptsAllData.enemyScripts[0];
+                    targetedEnemy = enemyScripts[0];
                     targetedEnemy.SetTargeted(true);
                     Debug.Log("Targeted enemy " + targetedEnemy.name);
                 }
