@@ -34,9 +34,8 @@ public class TurnManager : MonoBehaviour
     public void StartNewTurn(CombatManager.EntityScriptsAllData entityScriptsData)
     {
         //Get entities
-        Debug.LogFormat("EntityData:{0}", entityScriptsData);
+        //Debug.LogFormat("EntityData:{0}", entityScriptsData);
 
-        //Save entities
         EntityState playerState = entityScriptsData.playerScript.currentState.Clone();
         List<EntityState> enemiesState = entityScriptsData.enemyScripts.Select(e => e.currentState.Clone()).ToList();
 
@@ -46,10 +45,12 @@ public class TurnManager : MonoBehaviour
             Debug.Log($"Enemy currentState ref: {enemyState.GetHashCode()}");
         }
 
+        //Save entities
         turnData.Add(new Turn(currentTurnCount, playerState, enemiesState));
 
         //Move the turn
         currentTurnCount++;
+        Debug.LogFormat("Start of turn {0}", currentTurnCount);
 
         //Set the turn UI
         updateTurnUI();
@@ -74,7 +75,8 @@ public class TurnManager : MonoBehaviour
         //Set player state
         playerScript.currentState = pastTurn.playerState.Clone();
         playerScript.healthScript.SetHealth(pastTurn.playerState.currentHealth);
-        playerScript.SetMana(pastTurn.playerState.currentMana);
+        //DO NOT restore mana
+        //playerScript.SetMana(pastTurn.playerState.currentMana);
 
         //Set enemies state
         foreach (EntityState pastEnemyState in pastTurn.enemiesState) 

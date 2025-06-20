@@ -99,7 +99,7 @@ public class CombatManager : Singleton<CombatManager>
         targetedEnemy.SetTargeted(true);
     }
 
-    //TODO: Player and Enemy Turn
+    //Player and Enemy Turn
     public void TurnCombat(string playerTurnType)
     {
         //Get script
@@ -111,8 +111,6 @@ public class CombatManager : Singleton<CombatManager>
 
         if(playerTurnType!= "TimeMagic")
         {
-            targetedEnemy.Attack(playerScript, "attack");
-
             //TODO: Check death, add death screen
             if (playerScript.healthScript.CheckDeath())
             {
@@ -138,6 +136,12 @@ public class CombatManager : Singleton<CombatManager>
                 }
             }
 
+            //Each enemies attack
+            foreach (EnemyScript enemyScript in enemyScripts)
+            {
+                enemyScript.Attack(playerScript, "attack");
+            }
+            
             //End of turn
             entityScriptsAllData = GetEntityScriptsData();
             turnManager.StartNewTurn(entityScriptsAllData);

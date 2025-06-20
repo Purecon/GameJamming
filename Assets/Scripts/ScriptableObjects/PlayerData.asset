@@ -16,8 +16,8 @@ MonoBehaviour:
     entityName: Player
     physicalAttackDamage: 1
     magicAttackDamage: 20
-    currentHealth: 35
-    maxHealth: 35
+    currentHealth: 75
+    maxHealth: 75
     currentMana: 10
     maxMana: 10
     currentTeam: 0

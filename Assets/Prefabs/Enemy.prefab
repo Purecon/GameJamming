@@ -247,7 +247,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 26d5b8efb3e1a3e4ea03a2969472d251, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 048f6d715dce3644a914d2fffa188cc0, type: 2}
   currentState:
+    entityName: 
     physicalAttackDamage: 1
     magicAttackDamage: 1
     currentHealth: 10
@@ -373,6 +374,10 @@ PrefabInstance:
     - target: {fileID: 75236120855085737, guid: f9bc03cfa207d70429d8cfd60a1328bb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75236120855085737, guid: f9bc03cfa207d70429d8cfd60a1328bb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.33750153
       objectReference: {fileID: 0}
     - target: {fileID: 134970500750172163, guid: f9bc03cfa207d70429d8cfd60a1328bb, type: 3}
       propertyPath: m_Pivot.x
