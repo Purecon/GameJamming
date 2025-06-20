@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   state:
+    entityName: Player
     physicalAttackDamage: 1
     magicAttackDamage: 20
     currentHealth: 35

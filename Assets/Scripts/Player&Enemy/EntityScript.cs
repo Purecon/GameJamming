@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class EntityState
 {
+    public string entityName;
+
     [Header("Attack")]
     public float physicalAttackDamage = 1f;
     public float magicAttackDamage = 1f;
@@ -33,7 +35,7 @@ public class EntityState
     {
         return new EntityState
         {
-            //entityName = this.entityName,
+            entityName = this.entityName,
             physicalAttackDamage = this.physicalAttackDamage,
             magicAttackDamage = this.magicAttackDamage,
             maxHealth = this.maxHealth,
