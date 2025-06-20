@@ -19,7 +19,13 @@ public class EntityState
     public float currentMana = 10f;
     public float maxMana = 10f;
 
-    //TODO: Resistances
+    [Header("Resistances")]
+    public bool physicalResistance = false;
+    public bool magicResistance = false;
+
+    [Header("Vulnerabilities")]
+    public bool physicalVulnerability = false;
+    public bool magicVulnerability = false;
 
     public enum Teams
     {
@@ -38,11 +44,18 @@ public class EntityState
             entityName = this.entityName,
             physicalAttackDamage = this.physicalAttackDamage,
             magicAttackDamage = this.magicAttackDamage,
+
             maxHealth = this.maxHealth,
             currentHealth = this.currentHealth,
             maxMana = this.maxMana,
             currentMana = this.currentMana,
-            currentTeam = this.currentTeam
+            
+            physicalResistance = this.physicalResistance,
+            magicResistance = this.magicResistance,
+            physicalVulnerability = this.physicalVulnerability,
+            magicVulnerability = this.magicVulnerability,
+
+            currentTeam = this.currentTeam,
         };
     }
 }
@@ -66,7 +79,8 @@ public class EntityScript : MonoBehaviour
         if (currentState.currentTeam != targetEntity.currentState.currentTeam)
         {
             //Change health script
-            targetEntity.healthScript.ChangeHealth(-currentState.physicalAttackDamage);
+            float physDamage = -(currentState.physicalAttackDamage) * (targetEntity.currentState.physicalResistance ? 0.5f : 1f) * (targetEntity.currentState.physicalVulnerability ? 2f : 1f);
+            targetEntity.healthScript.ChangeHealth(physDamage);
             //Change current state
             targetEntity.currentState.currentHealth = targetEntity.healthScript.currentHealth;
         }

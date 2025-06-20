@@ -26,7 +26,8 @@ public class PlayerScript : EntityScript
             if(turnType.Contains("magic-attack"))
             {
                 //Change health script
-                targetEntity.healthScript.ChangeHealth(-(currentState.magicAttackDamage));
+                float magicDamage = -currentState.magicAttackDamage * (targetEntity.currentState.magicResistance ? 0.5f : 1f) * (targetEntity.currentState.magicVulnerability ? 2f : 1f);
+                targetEntity.healthScript.ChangeHealth(magicDamage);
                 //Change current state
                 targetEntity.currentState.currentHealth = targetEntity.healthScript.currentHealth;
                 //Minus current mana
@@ -37,7 +38,8 @@ public class PlayerScript : EntityScript
             else
             {
                 //Change health script
-                targetEntity.healthScript.ChangeHealth(-(currentState.physicalAttackDamage + physicalAttackBuff));
+                float physDamage = -(currentState.physicalAttackDamage + physicalAttackBuff) * (targetEntity.currentState.physicalResistance ? 0.5f : 1f) * (targetEntity.currentState.physicalVulnerability ? 2f : 1f);
+                targetEntity.healthScript.ChangeHealth(physDamage);
                 //Change current state
                 targetEntity.currentState.currentHealth = targetEntity.healthScript.currentHealth;
             }

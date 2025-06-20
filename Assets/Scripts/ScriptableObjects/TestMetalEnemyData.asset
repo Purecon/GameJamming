@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b1bfb6e1dc8b764494ad60014a29248, type: 3}
-  m_Name: TestEnemyData
+  m_Name: TestMetalEnemyData
   m_EditorClassIdentifier: 
   state:
-    entityName: TestEnemy
-    physicalAttackDamage: 5
+    entityName: TestMetalEnemy
+    physicalAttackDamage: 2
     magicAttackDamage: 1
-    currentHealth: 50
-    maxHealth: 50
+    currentHealth: 20
+    maxHealth: 20
     currentMana: 10
     maxMana: 10
-    physicalResistance: 0
+    physicalResistance: 1
     magicResistance: 0
     physicalVulnerability: 0
-    magicVulnerability: 0
+    magicVulnerability: 1
     currentTeam: 1
