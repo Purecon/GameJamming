@@ -87,7 +87,7 @@ public class EntityScript : MonoBehaviour
     }
 
     //Get initial settings 
-    private void Start()
+    public virtual void Start()
     {
         if (entityData != null)
         {

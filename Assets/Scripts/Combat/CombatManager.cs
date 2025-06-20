@@ -109,8 +109,31 @@ public class CombatManager : Singleton<CombatManager>
         PlayerScript playerScript = entityScriptsAllData.playerScript;
         List<EnemyScript> enemyScripts = entityScriptsAllData.enemyScripts;
 
+        //Check cooldown
+        PlayerScript.SkillCooldown skillCD = playerScript.skillCooldowns.Find(x => x.name == playerTurnType);
+        if(skillCD != null)
+        {
+            if (skillCD.crntCooldown > 0)
+            {
+                return;
+            }
+            else
+            {
+                skillCD.crntCooldown = skillCD.defaultCooldown;
+            }
+        }
+
+        //Reduce cooldown
+        foreach(PlayerScript.SkillCooldown playerSkillCD in playerScript.skillCooldowns)
+        {
+            if(playerSkillCD.name != playerTurnType)
+            {
+                playerSkillCD.crntCooldown = Mathf.Max(0, playerSkillCD.crntCooldown-1);   
+            }
+        }
+
+        //Player action
         playerActions[playerTurnType](playerScript,targetedEnemy);
-        //playerScript.Attack(targetedEnemy);
 
         if(playerTurnType!= "TimeMagic")
         {

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerScript : EntityScript
 {
+    //Special to player only
     [Header("Player Buff")]
     public float physicalAttackBuff = 0f;
 
@@ -13,10 +14,36 @@ public class PlayerScript : EntityScript
     public float maxMana = 10f;
     public Slider manaBar;
 
-    //TODO: Penalty
+    [System.Serializable]
+    public class SkillCooldown
+    {
+        public string name;
+        // Skill cooldown 0 means usable
+        public int crntCooldown;
+        public int defaultCooldown;
 
-    //Special to player only
-    //TODO: Buff
+        public SkillCooldown(string skillName, int skillCooldown)
+        {
+            name = skillName;
+            crntCooldown = 0;
+            defaultCooldown = skillCooldown;
+        }
+    }
+    [Header("Player Skill Cooldown -Edit in code-")]
+    public List<SkillCooldown> skillCooldowns;
+
+    public override void Start()
+    {
+        base.Start();
+
+        skillCooldowns = new List<SkillCooldown>()
+        {
+            new SkillCooldown("AOE_Attack", 3),
+            new SkillCooldown("AOE_M.Attack",3)
+        };
+    }
+
+
     public override void Attack(EntityScript targetEntity, string turnType)
     {
         Debug.LogFormat("{0} {2} {1}", name, targetEntity.name, turnType);
