@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state:
     entityName: TestMetalEnemy
-    physicalAttackDamage: 2
+    physicalAttackDamage: 1
     magicAttackDamage: 1
     currentHealth: 20
     maxHealth: 20

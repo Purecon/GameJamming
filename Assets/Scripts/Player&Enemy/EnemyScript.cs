@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class EnemyScript : EntityScript
 {
@@ -19,7 +20,7 @@ public class EnemyScript : EntityScript
     //On click
     void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             // Whatever you want it to do.
             Debug.Log("Left-clicked while hovering!");

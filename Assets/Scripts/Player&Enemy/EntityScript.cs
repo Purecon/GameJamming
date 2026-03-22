@@ -93,7 +93,7 @@ public class EntityScript : MonoBehaviour
         {
             //Set intial state
             currentState = entityData.state.Clone();
-            Debug.Log($"{name} currentState ref: {currentState.GetHashCode()}");
+            // Debug.Log($"{name} currentState ref: {currentState.GetHashCode()}");
         }
         else
         {

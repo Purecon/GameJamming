@@ -40,10 +40,10 @@ public class TurnManager : MonoBehaviour
         List<EntityState> enemiesState = entityScriptsData.enemyScripts.Select(e => e.currentState.Clone()).ToList();
 
         //DEBUGGING
-        Debug.Log($"Player currentState ref: {playerState.GetHashCode()}");
-        foreach (EntityState enemyState in enemiesState) {
-            Debug.Log($"Enemy currentState ref: {enemyState.GetHashCode()}");
-        }
+        // Debug.Log($"Player currentState ref: {playerState.GetHashCode()}");
+        // foreach (EntityState enemyState in enemiesState) {
+        //     Debug.Log($"Enemy currentState ref: {enemyState.GetHashCode()}");
+        // }
 
         //Save entities
         turnData.Add(new Turn(currentTurnCount, playerState, enemiesState));
